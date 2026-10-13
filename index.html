@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>桌面搜索助手 - 官方下载</title>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+        font-family: -apple-system, 'Microsoft YaHei', sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        color: #333;
+        padding: 40px 20px;
+    }
+    .container { max-width: 720px; margin: 0 auto; }
+    .card {
+        background: white; border-radius: 24px; padding: 48px 40px;
+        box-shadow: 0 24px 72px rgba(0,0,0,0.35); margin-bottom: 24px;
+    }
+    .logo {
+        font-size: 64px; text-align: center; margin-bottom: 20px;
+        filter: drop-shadow(0 4px 12px rgba(102,126,234,0.3));
+    }
+    h1 {
+        text-align: center; font-size: 32px; margin-bottom: 10px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        font-weight: 800;
+    }
+    .subtitle {
+        text-align: center; color: #888; font-size: 15px;
+        margin-bottom: 32px; line-height: 1.7;
+    }
+    .version-badge {
+        display: block; width: fit-content; margin: 0 auto 28px;
+        background: linear-gradient(135deg, #e8f4fd, #d4e9fb);
+        color: #0078d7; padding: 8px 20px; border-radius: 24px;
+        font-size: 14px; font-weight: bold;
+    }
+    .download-btn {
+        display: block; width: 100%; padding: 20px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white; text-align: center; text-decoration: none;
+        border-radius: 14px; font-size: 19px; font-weight: bold;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 10px 30px rgba(102,126,234,0.45);
+        margin-bottom: 12px;
+    }
+    .download-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 16px 40px rgba(102,126,234,0.6);
+    }
+    .download-btn:active { transform: translateY(-1px); }
+    .pwd-tip {
+        text-align: center; color: #666; font-size: 13px;
+        padding: 12px; background: #fff8e1; border-radius: 10px;
+        margin-bottom: 32px;
+    }
+    .pwd-tip strong { color: #d97706; font-size: 16px; }
+    .features { display: grid; gap: 4px; }
+    .feature {
+        display: flex; align-items: flex-start; gap: 16px;
+        padding: 18px; border-radius: 12px;
+        transition: background 0.2s;
+    }
+    .feature:hover { background: #f8f9ff; }
+    .feature-icon {
+        font-size: 26px; flex-shrink: 0;
+        width: 48px; height: 48px; display: flex;
+        align-items: center; justify-content: center;
+        background: linear-gradient(135deg, #f0f4ff, #e8eeff);
+        border-radius: 12px;
+    }
+    .feature-text h3 { font-size: 16px; margin-bottom: 4px; color: #222; }
+    .feature-text p { font-size: 13px; color: #888; line-height: 1.6; }
+    .changelog {
+        background: #f8f9ff; border-radius: 14px;
+        padding: 24px; margin-top: 32px;
+        border-left: 4px solid #667eea;
+    }
+    .changelog h3 {
+        font-size: 15px; margin-bottom: 14px; color: #333;
+        display: flex; align-items: center; gap: 8px;
+    }
+    .changelog ul { list-style: none; }
+    .changelog li {
+        font-size: 14px; color: #555; line-height: 2.2;
+        padding-left: 20px; position: relative;
+    }
+    .changelog li::before {
+        content: '▸'; position: absolute; left: 0;
+        color: #667eea; font-weight: bold;
+    }
+    .footer {
+        text-align: center; color: rgba(255,255,255,0.85);
+        font-size: 13px; padding: 20px; line-height: 1.8;
+    }
+    .footer a { color: white; text-decoration: none; border-bottom: 1px dashed rgba(255,255,255,0.5); }
+    @media (max-width: 480px) {
+        .card { padding: 32px 24px; }
+        h1 { font-size: 26px; }
+        .logo { font-size: 52px; }
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="logo">🔍</div>
+        <h1>桌面搜索助手</h1>
+        <p class="subtitle">安全 · 免费 · 本地运行 · 不上传任何数据</p>
+
+        <span class="version-badge" id="version">正在获取版本信息...</span>
+
+        <a href="#" class="download-btn" id="downloadBtn">
+            📥 下载最新版
+        </a>
+
+        <div class="pwd-tip" id="pwdTip" style="display:none;">
+            提取密码：<strong id="pwdText"></strong>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-text">
+                    <h3>毫秒级搜索</h3>
+                    <p>无需建立索引，输入关键词即刻找到文件</p>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🛡️</div>
+                <div class="feature-text">
+                    <h3>完全离线</h3>
+                    <p>不联网、不上传、不收集隐私，数据只在你电脑上</p>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🖥️</div>
+                <div class="feature-text">
+                    <h3>一键体检</h3>
+                    <p>查看磁盘、内存、CPU、网络状态，只读不修改</p>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📦</div>
+                <div class="feature-text">
+                    <h3>自动更新</h3>
+                    <p>启动时自动检查新版本，永远用最新的</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="changelog" id="changelog" style="display:none;">
+            <h3>📋 本版本更新内容</h3>
+            <ul id="changelogList"></ul>
+        </div>
+    </div>
+
+    <p class="footer">
+        © 2026 桌面搜索助手 · 完全免费<br>
+        <a href="https://lzong722.github.io/itbot-updates/latest.json" target="_blank">查看版本信息</a>
+    </p>
+</div>
+
+<script>
+fetch('latest.json')
+    .then(r => r.text())
+    .then(text => {
+        // 去掉可能的 BOM
+        const clean = text.replace(/^\uFEFF/, '');
+        return JSON.parse(clean);
+    })
+    .then(data => {
+        document.getElementById('version').textContent = '最新版本 v' + data.version;
+
+        const btn = document.getElementById('downloadBtn');
+        btn.href = data.download_url;
+
+        if (data.download_password) {
+            document.getElementById('pwdTip').style.display = 'block';
+            document.getElementById('pwdText').textContent = data.download_password;
+        }
+
+        if (data.changelog && data.changelog.length > 0) {
+            document.getElementById('changelog').style.display = 'block';
+            document.getElementById('changelogList').innerHTML =
+                data.changelog.map(item => '<li>' + item + '</li>').join('');
+        }
+    })
+    .catch(err => {
+        console.error('读取版本信息失败:', err);
+        document.getElementById('version').textContent = 'v2.0.0';
+    });
+</script>
+</body>
+</html>
