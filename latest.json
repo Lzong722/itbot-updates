@@ -1,0 +1,11 @@
+﻿{
+    "version": "2.0.0",
+    "download_url": "https://wwaoj.lanzoul.com/iwFJL4bvruuj",
+    "download_password": "416q",
+    "release_date": "2026-10-14",
+    "changelog": [
+        "新增：搜索整个电脑功能",
+        "新增：路径智能回退",
+        "优化：界面更清晰"
+    ]
+}
